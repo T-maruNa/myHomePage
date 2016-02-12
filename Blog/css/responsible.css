@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+@media screen and ( max-width:479px )
+{
+	div#wrapper{
+		width:100%;
+		text-align: left;
+	}
+	.Days{
+		word-wrap: break-word;
+		background-image: url("../img/background/sumafo.jpg")
+	}
+}

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+body {
+	text-align: center;
+}
+
+div#wrapper {
+	width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
+.link{
+	margin : 3px;
+}

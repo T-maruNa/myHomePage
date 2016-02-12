@@ -1,0 +1,4 @@
+<Files ~ "\.(ini)$">
+deny from all
+</Files>
+Options -Indexes

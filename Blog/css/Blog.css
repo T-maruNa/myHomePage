@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+pre{
+  margin:0px 0;
+  border:none;
+}
+body{
+	text-align: center;
+}
+div#wrapper{
+	width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.Days{
+	margin: 10px;
+	padding: 10px;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+.TitleLine{
+	display: block;
+	font-size: 1.17em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.TITLE{
+	font-size: 20px;
+	font-weight: bold;
+}
+.INSDATE{
+	font-size: 15px;
+	margin-left: 10px;
+	text-decoration: underline;
+}
+.CONTENT{
+	font-size: 15px;
+	position:relative; left:10px
+}
