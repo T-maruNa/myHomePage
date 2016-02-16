@@ -7,6 +7,12 @@
 	}
 	.Days{
 		word-wrap: break-word;
-		background-image: url("../img/background/sumafo.jpg")
+		background-image: url("../img/background/sumafo.jpg");
+	}
+	iframe{
+		top: 0;
+		left: 0;
+		width: 80%;
+		height: 30%;
 	}
 }

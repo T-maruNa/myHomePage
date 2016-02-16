@@ -45,21 +45,37 @@
 </head>
 <body>
 	<div id="wrapper">
-	<?php if($frontFLG == 1){?>
-		<form name=front method=POST action=<?php __FILE__ ?>>
-			<input type=hidden name="starDate"value=<?php echo $startDate;?>>
-			<a href="javascript:document.front.submit()">過去の20件を表示</a>
-		</form>
-	<?php }
-	for($i=0;$i<count($db_data);$i++){?>
-		<div class = 'Days'>
-			<div class = 'TitleLine'>
-				<span class="TITLE"><?php echo $db_data[$i]['title']; ?></span>
-				<span class="INSDATE"><?php echo $db_data[$i]['insdate']; ?></span>
+		<div id="SidePartner" style="float:left;">
+			<font color="red">まだオモチャ</font>
+			<div class="SideHeader"><?php echo date("Y/m/d(D)"); ?></div>
+			<div class="SideBody">Good:<span id="goodCount">0</span>/bad:<span id="badCount">0</span></div>
+		</div>
+		<?php if($frontFLG == 1){?>
+			<form name=front method=POST action=<?php __FILE__ ?>>
+				<input type=hidden name="starDate"value=<?php echo $startDate;?>>
+				<a href="javascript:document.front.submit()">過去の20件を表示</a>
+			</form>
+		<?php }?>
+		<div class = 'DaysContent'><?php
+		for($i=0;$i<count($db_data);$i++){?>
+			<div class = 'Day'>
+				<div class = 'TitleLine'>
+					<span class="TITLE"><?php echo $db_data[$i]['title']; ?></span>
+					<span class="INSDATE"><?php echo $db_data[$i]['insdate']; ?></span>
+				</div>
+				<span class="CONTENT"><?php echo $db_data[$i]['content']; ?></span><br>
+				<?php if($db_data[$i]['insdate'] >= date("Y/m/d")){ ?>
+				<input type="button"onclick="goodClick()"class="GoodClick"value="Good"><input type="button"onclick="badClick()" class="BadClick"value="Bad">
+				<?php }?>
 			</div>
-			<span class="CONTENT"><?php echo $db_data[$i]['content']; ?></span>
-		</div><?php
-	}?>
+			<?php
+		}?></div>
+		<?php if($frontFLG == 1){?>
+			<form name=front method=POST action=<?php __FILE__ ?>>
+				<input type=hidden name="starDate"value=<?php echo $startDate;?>>
+				<a href="javascript:document.front.submit()">過去の20件を表示</a>
+			</form>
+		<?php }?>
 	</div>
 </body>
 </html>
