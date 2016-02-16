@@ -51,9 +51,9 @@
 			<div class="SideBody">Good:<span id="goodCount">0</span>/bad:<span id="badCount">0</span></div>
 		</div>
 		<?php if($frontFLG == 1){?>
-			<form name=front method=POST action=<?php __FILE__ ?>>
+			<form name="frontH" method="POST" action=<?php __FILE__ ?>>
 				<input type=hidden name="starDate"value=<?php echo $startDate;?>>
-				<a href="javascript:document.front.submit()">過去の20件を表示</a>
+				<a href="javascript:document.frontH.submit()">過去の20件を表示</a>
 			</form>
 		<?php }?>
 		<div class = 'DaysContent'><?php
@@ -71,9 +71,9 @@
 			<?php
 		}?></div>
 		<?php if($frontFLG == 1){?>
-			<form name=front method=POST action=<?php __FILE__ ?>>
+			<form name=frontF method=POST action=<?php __FILE__ ?>>
 				<input type=hidden name="starDate"value=<?php echo $startDate;?>>
-				<a href="javascript:document.front.submit()">過去の20件を表示</a>
+				<a href="javascript:document.frontF.submit()">過去の20件を表示</a>
 			</form>
 		<?php }?>
 	</div>
