@@ -16,15 +16,16 @@ div#wrapper{
 	border-top:solid #cacaca 1px;
 	border-left: solid #cacaca 1px;
 	border-radius: 5px 5px 5px 5px;
-	word-wrap: break-word;
 }
 .Day{
 	padding: 10px;
+	display: block;
 	background: #fcfffd;
 	border-right:solid #cacaca 1px;
 	border-bottom: solid #cacaca 1px;
 }
 .TitleLine{
+	display: block;
 	font-size: 1.17em;
 	font-weight: bold;
 	margin-bottom: 10px;
@@ -41,6 +42,7 @@ div#wrapper{
 }
 .CONTENT{
 	font-size: 15px;
+	position:relative;
 	left:10px
 }
 #SidePartner{

@@ -1,5 +1,5 @@
 <?php
-	require_once('./common/DBUtil.php');
+	require_once('./src/common/DBUtil.php');
 
 	// 初期化
 	$DBUtil = new DBUtil();
@@ -13,22 +13,24 @@
 		$startDate ='29991231';
 	}
 
-	$DBUtil->setQuery("SHOW_BLOG");
-	$DBUtil->stmtExec($startDate);
+	//ブログ内容の取得
+	$DBUtil->setQuery("SHOW_BLOG", $startDate);
 	$stmt = &$DBUtil->getStmt();
-	if($stmt->bind_result($title, $content, $insdate)){//結果のバインド
+	if($stmt->bind_result($id, $title, $content, $insdate, $goodCnt)){//結果のバインド
 		while ($stmt->fetch()) {
+			$db_data[$rownum]["id"]  = $id;
 			$db_data[$rownum]["title"]  = $title;
 			$db_data[$rownum]["content"] = $content;
 			$db_data[$rownum]["insdate"]  = $insdate;
+			$db_data[$rownum]["goodCnt"]  = $goodCnt;
 			$rownum++;
 		}
 		$startDate = str_replace("/", "", $db_data[$rownum-1]["insdate"]) ;
 	}
 	$stmt->close();
 
-	$DBUtil->setQuery("SHOW_BLOG_IS_NEXT");
-	$DBUtil->stmtExec($startDate);
+	//startDateより前の日付のブログがあるか
+	$DBUtil->setQuery("SHOW_BLOG_IS_NEXT", $startDate);
 	$stmt = &$DBUtil->getStmt();
 	if($stmt->bind_result($cnt)){
 		$stmt->fetch();//SQLの結果取得
@@ -43,13 +45,15 @@
 <head>
 	<?php include('./header.php'); ?>
 </head>
-<body>
+
+<body onbeforeunload="ajaxExec()">
 	<div id="wrapper">
 		<div id="SidePartner" style="float:left;">
 			<font color="red">まだオモチャ</font>
 			<div class="SideHeader"><?php echo date("Y/m/d(D)"); ?></div>
-			<div class="SideBody">Good:<span id="goodCount">0</span>/bad:<span id="badCount">0</span></div>
+			<div class="SideBody">Good:<span id="0goodCount">0</span>/bad:<span id="badCount">0</span></div>
 		</div>
+		<!-- <img alt="test" src="./img/icon/test.png"onclick="ajaxExec()"> -->
 		<?php if($frontFLG == 1){?>
 			<form name="frontH" method="POST" action=<?php __FILE__ ?>>
 				<input type=hidden name="starDate"value=<?php echo $startDate;?>>
@@ -57,16 +61,18 @@
 			</form>
 		<?php }?>
 		<div class = 'DaysContent'><?php
-		for($i=0;$i<count($db_data);$i++){?>
+		for($i=0;$i<count($db_data);$i++){;?>
 			<div class = 'Day'>
 				<div class = 'TitleLine'>
 					<span class="TITLE"><?php echo $db_data[$i]['title']; ?></span>
 					<span class="INSDATE"><?php echo $db_data[$i]['insdate']; ?></span>
 				</div>
 				<span class="CONTENT"><?php echo $db_data[$i]['content']; ?></span><br>
-				<?php if($db_data[$i]['insdate'] >= date("Y/m/d")){ ?>
-				<input type="button"onclick="goodClick()"class="GoodClick"value="Good"><input type="button"onclick="badClick()" class="BadClick"value="Bad">
-				<?php }?>
+				<div id=<?php echo $db_data[$i]['id']; ?>>
+					<img alt="いいね" src="./img/icon/good0.png"onclick="goodClick('<?php echo $db_data[$i]['id']; ?>')">
+					<input type="hidden" value="0">
+					<span id=<?php echo $db_data[$i]['id']. "_goodCnt";?>><?php echo $db_data[$i]["goodCnt"];?></span>
+				</div>
 			</div>
 			<?php
 		}?></div>
